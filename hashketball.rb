@@ -120,28 +120,24 @@ def game_hash
 }
 end
 
-def num_points_scored(player_name)
+def get_player(player_name)
   answer = nil
   game_hash.each do |location, team_data|
-    team_data[:players].each do |attribute, attribute_data|
-      if attribute[:player_name] == player_name
-        answer = attribute[:points]
+    team_data[:players].each do |player|
+      if player[:player_name] == player_name
+        answer = player
       end
     end
   end
   answer
 end
 
+def num_points_scored(player_name)
+  get_player(player_name)[:points]
+end
+
 def shoe_size(player_name)
-  answer = nil
-  game_hash.each do |location, team_data|
-    team_data[:players].each do |attribute, attribute_data|
-      if attribute[:player_name] == player_name
-        answer = attribute[:shoe]
-      end
-    end
-  end
-  answer
+  get_player(player_name)[:shoe]
 end
 
 def team_colors(team_name)
